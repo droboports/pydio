@@ -10,7 +10,7 @@ name="pydio"
 version="6.0.7"
 description="Pydio server"
 depends="apache2"
-webui="WebUI"
+webui=":80/pydio"
 
 prog_dir="$(dirname "$(realpath "${0}")")"
 tmp_dir="/tmp/DroboApps/${name}"
@@ -26,7 +26,7 @@ fi
 
 start() {
   chown -R nobody "${prog_dir}/www/data"
-  chown -R nobody "${prog_dir}/www/.htaccess"
+  find "${prog_dir}/www/" -name .htaccess -exec chown -R nobody {} \;
   ln -fs "${prog_dir}/pydio.conf" "${DROBOAPPS_DIR}/apache2/etc/includes/pydio.conf"
   "${DROBOAPPS_DIR}/apache2/service.sh" restart
   return 0
