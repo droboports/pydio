@@ -13,8 +13,10 @@ exec 3>&1 4>&2 1>> "${logfile}" 2>&1
 echo "$(date +"%Y-%m-%d %H-%M-%S"):" "${0}" "${@}"
 set -o errexit  # exit on uncaught error code
 set -o nounset  # exit on unset variable
-set -o pipefail # propagate last error code on pipe
 set -o xtrace   # enable script tracing
+
+# install apache 2.x
+/usr/bin/DroboApps.sh install_version apache 2
 
 # copy default configuration files
 find "${prog_dir}" -type f -name "*.default" -print | while read deffile; do
