@@ -18,6 +18,17 @@ set -o xtrace   # enable script tracing
 # install apache 2.x
 /usr/bin/DroboApps.sh install_version apache 2
 
+# generate cert/key
+mkdir -p "${prog_dir}/etc/certs"
+if [ ! -f "${prog_dir}/etc/certs/cert.pem" ] || \
+   [ ! -f "${prog_dir}/etc/certs/key.pem" ]; then
+  "/mnt/DroboFS/Shares/DroboApps/apache/libexec/openssl" req -new -x509 \
+    -keyout "${prog_dir}/etc/certs/key.pem" \
+    -out "${prog_dir}/etc/certs/cert.pem" \
+    -days 3650 -nodes -subj "/C=US/ST=CA/L=San Jose/CN=$(hostname)"
+  chmod 640 "${prog_dir}/etc/certs/cert.pem" "${prog_dir}/etc/certs/key.pem"
+fi
+
 # copy default configuration files
 find "${prog_dir}" -type f -name "*.default" -print | while read deffile; do
   basefile="$(dirname "${deffile}")/$(basename "${deffile}" .default)"

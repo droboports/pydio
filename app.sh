@@ -33,8 +33,8 @@ pushd "target/${FOLDER}"
 sed -e "s|default=.php.|default=\"/mnt/DroboFS/Shares/DroboApps/apache/bin/php\"|g" -i "plugins/core.ajaxplorer/manifest.xml"
 # Change default path for imagemagick convert
 sed -e "s|default=./usr/bin/convert.|default=\"/mnt/DroboFS/Shares/DroboApps/pydio/libexec/convert\"|g" -i "plugins/editor.imagick/manifest.xml"
-mkdir -p "${DEST}/www"
-cp -vfaR . "${DEST}/www"
+mkdir -p "${DEST}/app"
+cp -vfaR . "${DEST}/app"
 popd
 }
 
@@ -48,8 +48,8 @@ local FILE="aws.phar"
 local URL="https://github.com/aws/aws-sdk-php/releases/download/${VERSION}/${FILE}"
 
 _download_file_in_folder "${FILE}" "${URL}" "${FOLDER}"
-mkdir -p "${DEST}/www/plugins/access.s3"
-cp -vf "download/${FOLDER}/${FILE}" "${DEST}/www/plugins/access.s3/"
+mkdir -p "${DEST}/app/plugins/access.s3"
+cp -vf "download/${FOLDER}/${FILE}" "${DEST}/app/plugins/access.s3/"
 }
 
 _build() {

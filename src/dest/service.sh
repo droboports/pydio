@@ -9,18 +9,21 @@ framework_version="2.1"
 name="pydio"
 version="6.0.8"
 description="Pydio is an open source software solution for file sharing and synchronization"
-depends="apache"
-webui=":8080/pydio"
+depends="apache locale"
+webui="WebUI"
 
 prog_dir="$(dirname "$(realpath "${0}")")"
-conffile="${prog_dir}/pydio.conf"
-apachefile="${DROBOAPPS_DIR}/apache/etc/includes/pydio.conf"
+conffile="${prog_dir}/etc/pydioapp.conf"
+apachefile="${DROBOAPPS_DIR}/apache/conf/includes/pydioapp.conf"
 daemon="${DROBOAPPS_DIR}/apache/service.sh"
 tmp_dir="/tmp/DroboApps/${name}"
 pidfile="${tmp_dir}/pid.txt"
 logfile="${tmp_dir}/log.txt"
 statusfile="${tmp_dir}/status.txt"
 errorfile="${tmp_dir}/error.txt"
+
+locale="${DROBOAPPS_DIR}/locale/bin/locale"
+localedef="${DROBOAPPS_DIR}/locale/bin/localedef"
 
 # backwards compatibility
 if [ -z "${FRAMEWORK_VERSION:-}" ]; then
@@ -29,6 +32,21 @@ if [ -z "${FRAMEWORK_VERSION:-}" ]; then
 fi
 
 start() {
+  rm -f "${statusfile}" "${errorfile}"
+
+  if [ ! -f "${locale}" ]; then
+    echo "Locale is not installed, please install and start crashplan again." > "${statusfile}"
+    echo "1" > "${errorfile}"
+    return 1
+  fi
+
+  if ! ("${locale}" -a | grep -q ^en_US.utf8); then
+    "${localedef}" -f UTF-8 -i en_US en_US.UTF-8
+  fi
+
+  export LC_ALL="en_US.UTF-8"
+  export LANG="en_US.UTF-8"
+
 #  chown -R nobody "${prog_dir}/www/data"
 #  find "${prog_dir}/www/" -name .htaccess -exec chown -R nobody {} \;
   cp -vf "${conffile}" "${apachefile}"

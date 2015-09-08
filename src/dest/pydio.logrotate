@@ -1,0 +1,27 @@
+/tmp/DroboApps/pydio/log.txt {
+  missingok
+  notifempty
+  size 50k
+  rotate 1
+  su root root
+  copytruncate
+}
+
+/tmp/DroboApps/pydio/access.log {
+  missingok
+  notifempty
+  size 50k
+  rotate 1
+  su root root
+  copytruncate
+}
+
+/tmp/DroboApps/pydio/error.log {
+  missingok
+  notifempty
+  size 50k
+  rotate 1
+  su root root
+  copytruncate
+}
+
