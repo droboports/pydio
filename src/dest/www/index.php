@@ -255,7 +255,7 @@ if (strpos($out[0], "running") !== FALSE) {
           </ol>
           <p>It is possible to have a trusted SSL certificate for free from StartSSL. Follow <a href="http://arstechnica.com/security/2009/12/how-to-get-set-with-a-secure-sertificate-for-free/" target="_new">this article</a> to get the step-by-step instructions.</p>
           <p>Once you have the certificate files, place them in <code>/mnt/DroboFS/Shares/DroboApps/pydio/etc/certs/</code>, either following the naming convention in place (<code>cert.pem</code> for the certificate and <code>key.pem</code> for the private key) or edit <code>/mnt/DroboFS/Shares/DroboApps/pydio/etc/pydioapp.conf</code> to <a href="http://httpd.apache.org/docs/2.4/ssl/ssl_howto.html" target="_new">adjust the SSL configuration</a>.</p>
-          <p>For larger deployments (that is, many simultaneous users) it is recommended to install the MySQL DroboApp and configure Pydio to use MySQL as the storage database instead of Sqlite.</p>
+          <p>For larger deployments (that is, many simultaneous users) it is recommended to install the MySQL DroboApp and configure Pydio to use MySQL as the storage database instead of SQLite.</p>
         </div>
       </div>
     </div>
