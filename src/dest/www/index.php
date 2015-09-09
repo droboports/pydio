@@ -254,7 +254,7 @@ if (strpos($out[0], "running") !== FALSE) {
             <li>If your public IP address changes over time<?php if ($publicip != "") { ?> (currently <?php echo $publicip; ?>)<?php } ?>, configure a <a href="http://www.howtogeek.com/66438/how-to-easily-access-your-home-network-from-anywhere-with-ddns/" target="_new">dynamic DNS address</a> to your public IP address.</li>
           </ol>
           <p>It is possible to have a trusted SSL certificate for free from StartSSL. Follow <a href="http://arstechnica.com/security/2009/12/how-to-get-set-with-a-secure-sertificate-for-free/" target="_new">this article</a> to get the step-by-step instructions.</p>
-          <p>Once you have the certificate files, place them in <code>/mnt/DroboFS/Shares/DroboApps/pydio/etc/certs/</code>, either following the naming convention in place (<code>cert.pem</code> for the certificate and <code>key.pem</code> for the private key) or edit <code>/mnt/DroboFS/Shares/DroboApps/pydio/etc/pydio.conf</code> to <a href="http://httpd.apache.org/docs/2.4/ssl/ssl_howto.html" target="_new">adjust the SSL configuration</a>.</p>
+          <p>Once you have the certificate files, place them in <code>/mnt/DroboFS/Shares/DroboApps/pydio/etc/certs/</code>, either following the naming convention in place (<code>cert.pem</code> for the certificate and <code>key.pem</code> for the private key) or edit <code>/mnt/DroboFS/Shares/DroboApps/pydio/etc/pydioapp.conf</code> to <a href="http://httpd.apache.org/docs/2.4/ssl/ssl_howto.html" target="_new">adjust the SSL configuration</a>.</p>
           <p>For larger deployments (that is, many simultaneous users) it is recommended to install the MySQL DroboApp and configure Pydio to use MySQL as the storage database instead of Sqlite.</p>
         </div>
       </div>
@@ -271,8 +271,8 @@ if (strpos($out[0], "running") !== FALSE) {
         <div class="panel-body">
           <?php if (! $apprunning) { ?><p><strong>I cannot connect to Pydio on the Drobo.</strong></p>
           <p>Make sure that mysql is running. Currently it seems to be <strong>stopped</strong>.</p><?php } ?>
-          <?php if ($publicip == "") { ?><p>Make sure that your internet connection is working. Currently it seems your Drobo cannot retrieve its public IP address.</p><?php } ?>
           <p><strong>I cannot connect to Pydio on the Drobo from outside my home network.</strong></p>
+          <?php if ($publicip == "") { ?><p>Make sure that your internet connection is working. Currently it seems your Drobo cannot retrieve its public IP address.</p><?php } ?>
           <p>Make sure that your ports are correctly forwarded and <a href="<?php echo $portscansite; ?>" target="_new">reachable from the internet</a>. If not, please contact your ISP to unblock them.</p>
         </div>
       </div>
