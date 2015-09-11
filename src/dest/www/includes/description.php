@@ -1,0 +1,2 @@
+<p>This DroboApp deploys <?php echo $appname; ?> (formerly AjaXplorer) on your Drobo.</p>
+<p><?php echo $appname; ?> is a mature open source software solution for file sharing and synchronization. Pydio offers web, mobile, and desktop user interfaces.</p>
